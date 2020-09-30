@@ -166,7 +166,7 @@ reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\AppHost" /v ContentEvalu
 reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Device Metadata" /f
 
 :: New Control Panel cleanup
-reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v SettingsPageVisibility /t REG_SZ /d "showonly:defaultapps;display;nightlight;sound;powersleep;batterysaver;batterysaver-usagedetails;batterysaver-settings;multitasking;about;bluetooth;connecteddevices;printers;mousetouchpad;devices-touchpad;typing;pen;autoplay;usb;network-status;network-cellular;network-wifi;network-wificalling;network-wifisettings;network-ethernet;network-dialup;netowrk-vpn;network-airplanemode;network-mobilehotspot;datausage;network-proxy;personalization-background;colors;lockscreen;themes;taskbar;easeofaccess-narrator;easeofaccess-magnifier;easeofaccess-highcontrast;easeofaccess-closedcaptioning;easeofaccess-keyboard;easeofaccess-mouse;easeofaccess-otheroptions;dateandtime;notifications" /f > NUL 2>&1
+::reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v SettingsPageVisibility /t REG_SZ /d "showonly:defaultapps;display;nightlight;sound;powersleep;batterysaver;batterysaver-usagedetails;batterysaver-settings;multitasking;about;bluetooth;connecteddevices;printers;mousetouchpad;devices-touchpad;typing;pen;autoplay;usb;network-status;network-cellular;network-wifi;network-wificalling;network-wifisettings;network-ethernet;network-dialup;netowrk-vpn;network-airplanemode;network-mobilehotspot;datausage;network-proxy;personalization-background;colors;lockscreen;themes;taskbar;easeofaccess-narrator;easeofaccess-magnifier;easeofaccess-highcontrast;easeofaccess-closedcaptioning;easeofaccess-keyboard;easeofaccess-mouse;easeofaccess-otheroptions;dateandtime;notifications" /f > NUL 2>&1
 
 :: Disabling And Stopping Services
 cls
@@ -218,7 +218,7 @@ REG DELETE "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explore
 REG DELETE "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}" /f > NUL 2>&1
 
 :: Disabling Storage Sense
-reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\StorageSense" /f > NUL 2>&1
+::reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\StorageSense" /f > NUL 2>&1
 
 :: Disabling Cortana and Removing Search Icon from Taskbar
 cls
@@ -229,21 +229,21 @@ timeout /t 2 /nobreak
 taskkill /F /IM SearchUI.exe
 rename "C:\Windows\SystemApps\Microsoft.Windows.Cortana_cw5n1h2txyewy" "C:\Windows\SystemApps\Microsoft.Windows.Cortana_cw5n1h2txyewy.bak" > NUL 2>&1
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "AllowCortana" /t REG_DWORD /d 0 /f > NUL 2>&1
-reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" /v "SearchboxTaskbarMode" /t REG_DWORD /d 0 /f > NUL 2>&1
+::reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" /v "SearchboxTaskbarMode" /t REG_DWORD /d 0 /f > NUL 2>&1
 
 :: Disable Timeline
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\System" /v "EnableActivityFeed" /t REG_DWORD /d 0 /f > NUL 2>&1
 
 :: Fixing Windows Explorer
-cls
-echo.
-echo  :: Setup Windows Explorer View
-timeout /t 2 /nobreak
-REG ADD "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v LaunchTo /t REG_DWORD /d 1 /f > NUL 2>&1
-REG DELETE "HKEY_CLASSES_ROOT\CABFolder\CLSID" /f > NUL 2>&1
-REG DELETE "HKEY_CLASSES_ROOT\SystemFileAssociations\.cab\CLSID" /f > NUL 2>&1
-REG DELETE "HKEY_CLASSES_ROOT\CompressedFolder\CLSID" /f > NUL 2>&1
-REG DELETE "HKEY_CLASSES_ROOT\SystemFileAssociations\.zip\CLSID" /f > NUL 2>&1
+::cls
+::echo.
+::echo  :: Setup Windows Explorer View
+::timeout /t 2 /nobreak
+::REG ADD "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v LaunchTo /t REG_DWORD /d 1 /f > NUL 2>&1
+::REG DELETE "HKEY_CLASSES_ROOT\CABFolder\CLSID" /f > NUL 2>&1
+::REG DELETE "HKEY_CLASSES_ROOT\SystemFileAssociations\.cab\CLSID" /f > NUL 2>&1
+::REG DELETE "HKEY_CLASSES_ROOT\CompressedFolder\CLSID" /f > NUL 2>&1
+::REG DELETE "HKEY_CLASSES_ROOT\SystemFileAssociations\.zip\CLSID" /f > NUL 2>&1
 
 :: Disable PageFile and ActiveProbing
 REG ADD "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v ClearPageFileAtShutdown /t REG_DWORD /d 1 /f > NUL 2>&1
@@ -258,10 +258,10 @@ echo.
 echo  :: Removing AppXPackages
 echo.
 PowerShell -Command "Get-AppxPackage *3DBuilder* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage *AppInstaller* | Remove-AppxPackage"
+::PowerShell -Command "Get-AppxPackage *AppInstaller* | Remove-AppxPackage"
 PowerShell -Command "Get-AppxPackage *FeedbackHub* | Remove-AppxPackage"
 PowerShell -Command "Get-AppxPackage *MixedRealityPortal* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage *Microsoft.Caclulator* | Remove-AppxPackage"
+::PowerShell -Command "Get-AppxPackage *Microsoft.Caclulator* | Remove-AppxPackage"
 PowerShell -Command "Get-AppxPackage *Microsoft.WindowsAlarms* | Remove-AppxPackage"
 PowerShell -Command "Get-AppxPackage *Microsoft.GetHelp* | Remove-AppxPackage"
 PowerShell -Command "Get-AppxPackage *Microsoft.* | Remove-AppxPackage"
@@ -274,7 +274,7 @@ PowerShell -Command "Get-AppxPackage *MicrosoftOfficeHub* | Remove-AppxPackage"
 PowerShell -Command "Get-AppxPackage *OneNote* | Remove-AppxPackage"
 PowerShell -Command "Get-AppxPackage *people* | Remove-AppxPackage"
 PowerShell -Command "Get-AppxPackage *WindowsPhone* | Remove-AppxPackage"
-PowerShell -Command "Get-AppxPackage *photos* | Remove-AppxPackage"
+::PowerShell -Command "Get-AppxPackage *photos* | Remove-AppxPackage"
 PowerShell -Command "Get-AppxPackage *SkypeApp* | Remove-AppxPackage"
 PowerShell -Command "Get-AppxPackage *solit* | Remove-AppxPackage"
 PowerShell -Command "Get-AppxPackage *WindowsSoundRecorder* | Remove-AppxPackage"
@@ -466,7 +466,7 @@ cls
 
 		:: Recommended optional packages include: libreoffice steam adobeair ffmpeg mpv youtube-dl directx cygwin babun transmission-qt audacity cdrtfe obs syncthing keepass
 		
-		@powershell -NoProfile -ExecutionPolicy Bypass -Command "choco install -y --force --allow-empty-checksums vlc 7zip open-shell jpegview vcredist-all directx brave"
+		@powershell -NoProfile -ExecutionPolicy Bypass -Command "choco install -y --force --allow-empty-checksums vlc 7zip open-shell vcredist-all directx firefox"
 
 :: reg add "HKEY_CLASSES_ROOT\Directory\shell\Open with MPV" /v icon /t REG_SZ /d "C:\\ProgramData\\chocolatey\\lib\\mpv.install\\tools\\mpv-document.ico" /f
 :: reg add "HKCR\Directory\shell\Open with MPV\command" /v @ /t REG_SZ /d "mpv \"%1\"" /f
